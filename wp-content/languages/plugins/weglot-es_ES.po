@@ -1,0 +1,700 @@
+# Translation of Plugins - Weglot Translate - Translate your WP website - Stable (latest release) in Spanish (Spain)
+# This file is distributed under the same license as the Plugins - Weglot Translate - Translate your WP website - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-04-06 09:29:26+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: es\n"
+"Project-Id-Version: Plugins - Weglot Translate - Translate your WP website - Stable (latest release)\n"
+
+#: includes/wg-settings-page.php:135
+msgid "Rectangle shiny"
+msgstr "Rectangular brillante"
+
+#. Author of the plugin/theme
+msgid "Remy B"
+msgstr "Remy B"
+
+#. Description of the plugin/theme
+msgid "Translate your website into multiple languages in minutes without doing any coding. Fully SEO compatible."
+msgstr "Traduce tu sitio web a varios idiomas en minutos sin tener que codificar. Compatible completamente con SEO."
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/Weglot/"
+msgstr "http://wordpress.org/plugins/Weglot/"
+
+#: weglot.php:240
+msgid "Weglot Translate: You need to activate the mod_rewrite module. You can find more information here : %1$sUsing Permalinks%3$s. If you need help, just ask us directly %2$shere%3$s."
+msgstr "Weglot Translate: Necesitas activar el módulo mod_rewrite. Puedes encontrar más información aquí: %1$suso de enlaces permanentes%3$s. Si necesitas ayuda, puedes preguntárnoslo directamente %2$saquí%3$s."
+
+#: weglot.php:232
+msgid "Weglot Translate plugin requires at least PHP 5.3 and you have PHP %s. Please upgrade your PHP version (you can contact your host and they will do it for you)."
+msgstr "El plugin Weglot Translate necesita al menos PHP 5.3 y tienes PHP %s. Por favor, mejora la versión de tu PHP (puedes contactar con tu proveedor de alojamiento y lo harán por ti)."
+
+#: weglot.php:224
+msgid "Weglot Translate is not active because you have exceeded the free limit. Please %supgrade your plan%s if you want to keep the service running."
+msgstr "Weglot Translate no está activo porque has excedido el límite gratuito. Por favor %smejora tu plan%s si quieres seguir teniendo el servicio funcionando."
+
+#: weglot.php:217
+msgid "Settings"
+msgstr "Ajustes"
+
+#: weglot.php:178
+msgid "Plugin Activation Error"
+msgstr "Error de activación del plugin"
+
+#: weglot.php:177
+msgid "Please upgrade your PHP version. You can ask your host provider to do this by sending them an email."
+msgstr "Por favor, mejora tu versión de PHP. Puedes pedírselo a tu proveedor de alojamiento enviándoles un correo electrónico."
+
+#: weglot.php:177
+msgid "In order to activate Weglot, you need PHP version <strong>5.3</strong> or greater. Your current version of PHP is %s."
+msgstr "Para poder activar Weglot, necesitas la versión de PHP <strong>5.3</strong> o superior. Tu versión actual de PHP es %s."
+
+#: weglot.php:177
+msgid "Thank you for downloading <strong>Weglot Translate</strong>!"
+msgstr "¡Gracias por descargarte <strong>Weglot Translate</strong>!"
+
+#: includes/wg-settings-page.php:272
+msgid "If you need any help, you can contact us via our live chat at %sweglot.com%s or email us at support@weglot.com."
+msgstr "Si necesitas ayuda, puedes contactar con nosotros en nuestro chat en vivo en %sweglot.com%s o escribirnos un correo electrónico a support@weglot.com."
+
+#: includes/wg-settings-page.php:269
+msgid "Love Weglot? Give us 5 stars on WordPress.org :)"
+msgstr "¿Te gusta Weglot? Danos 5 estrellas en WordPress.org :)"
+
+#: includes/wg-settings-page.php:264
+msgid "Edit my translations"
+msgstr "Editar mis traducciones"
+
+#: includes/wg-settings-page.php:264
+msgid "https://weglot.com/dashboard"
+msgstr "https://weglot.com/dashboard"
+
+#: includes/wg-settings-page.php:263
+msgid "You can find all your translations in your Weglot account:"
+msgstr "Puedes encontrar todas las traducciones en tu cuenta de Weglot:"
+
+#: includes/wg-settings-page.php:261
+msgid "Where are my translations?"
+msgstr "¿Dónde están mis traducciones?"
+
+#: includes/wg-settings-page.php:252
+msgid "Write CSS rules to apply on %s page."
+msgstr "Escribe las reglas CSS a aplicar en la página %s."
+
+#: includes/wg-settings-page.php:248
+msgid "Customize style for "
+msgstr "Personalizar estilo para"
+
+#: includes/wg-settings-page.php:246
+msgid "Right to Left languages"
+msgstr "Idiomas de derecha a izquierda"
+
+#: includes/wg-settings-page.php:246
+msgid "Left to Right languages"
+msgstr "Idiomas de izquierda a derecha"
+
+#: includes/wg-settings-page.php:241
+msgid "Check if you want to redirect users based on their browser language."
+msgstr "Marca si quieres redirigir a los usuarios según el idioma de su navegador."
+
+#: includes/wg-settings-page.php:240
+msgid "Auto redirect?"
+msgstr "¿Redirección automática?"
+
+#: includes/wg-settings-page.php:236
+msgid "Other options"
+msgstr "Otras opciones"
+
+#: includes/wg-settings-page.php:231
+msgid "Enter CSS selectors, separated by commas."
+msgstr "Escribe los selectores de CSS, separados por comas."
+
+#: includes/wg-settings-page.php:231
+msgid "Exclude blocks"
+msgstr "Excluir bloques"
+
+#: includes/wg-settings-page.php:227
+msgid "You can write regex."
+msgstr "Puedes escribir expresiones regulares."
+
+#: includes/wg-settings-page.php:227
+msgid "Exclude URL here"
+msgstr "Excluir URLs aquí"
+
+#: includes/wg-settings-page.php:224
+msgid "By default, every page is translated. You can exclude parts of a page or a full page here."
+msgstr "Por defecto, todas las páginas se traducen. Aquí puedes excluir partes de una página o una página completa."
+
+#: includes/wg-settings-page.php:222
+msgid "Translation Exclusion"
+msgstr "Exclusiones de la traducción"
+
+#: includes/wg-settings-page.php:219
+msgid "You can add the code &lt;div id=&quot;weglot_here&quot;&gt;&lt;/div&gt; wherever you want in the source code of your HTML page. The button will appear at this place."
+msgstr "Puedes añadir el código &lt;div id=&quot;weglot_here&quot;&gt;&lt;/div&gt; donde quieras en el código fuente de tu página HTML. El botón de mostrará en ese lugar."
+
+#: includes/wg-settings-page.php:218
+msgid "In the source code?"
+msgstr "¿En el código fuente?"
+
+#: includes/wg-settings-page.php:215
+msgid "You can use the Weglot shortcode [weglot_switcher] wherever you want to place the button."
+msgstr "Puedes utilizar el shortcode [weglot_switcher] donde quieras que aparezca el botón."
+
+#: includes/wg-settings-page.php:214
+msgid "With a shortcode?"
+msgstr "¿Con un shortcode?"
+
+#: includes/wg-settings-page.php:211
+msgid "You can place the button in a widget area. Go to Appearance -> Widgets and drag and drop the Weglot Translate widget where you want."
+msgstr "Puedes colocar el botón en un área de widget. Ve a Apariencia -> Widgets y arrastra y suelta el widget de Weglot Translate donde quieras."
+
+#: includes/wg-settings-page.php:210
+msgid "As a widget?"
+msgstr "¿Como un widget?"
+
+#: includes/wg-settings-page.php:207
+msgid "Check if you want to display the button in the navigation menu."
+msgstr "Marca si quieres mostrar el botón en el menú de navegación."
+
+#: includes/wg-settings-page.php:206
+msgid "In menu?"
+msgstr "¿En el menú?"
+
+#: includes/wg-settings-page.php:203
+msgid "Where will the language button be on my website? By default, bottom right."
+msgstr "¿Dónde estará el botón de idioma en mi sitio web? Por defecto, en la parte inferior derecha."
+
+#: includes/wg-settings-page.php:202
+msgid "Language button position"
+msgstr "Posición del botón de idioma"
+
+#: includes/wg-settings-page.php:192
+msgid "Don't change it unless you want a specific style for your button."
+msgstr "No lo cambies a menos que quieras un estilo específico para tu botón."
+
+#: includes/wg-settings-page.php:192
+msgid "Override CSS"
+msgstr "Sobrescribir el CSS"
+
+#: includes/wg-settings-page.php:189
+msgid "Check if you want the name of the languge. Don't check if you want the language code."
+msgstr "Marca si quieres el nombre del idioma. No lo marques si quieres el código del idioma."
+
+#: includes/wg-settings-page.php:188
+msgid "Full name?"
+msgstr "¿Nombre completo?"
+
+#: includes/wg-settings-page.php:185
+msgid "Check if you want to display the name of languages."
+msgstr "Marca si quieres mostrar el nombre de los idiomas."
+
+#: includes/wg-settings-page.php:184
+msgid "With name?"
+msgstr "¿Con nombre?"
+
+#: includes/wg-settings-page.php:179
+msgid "If you want to use a different flag, just ask us."
+msgstr "Si quieres utilizar una bandera distinta, sólo tienes que pedírnoslo."
+
+#: includes/wg-settings-page.php:177
+msgid "Portugal"
+msgstr "Portugal"
+
+#: includes/wg-settings-page.php:176
+msgid "Brazil (default)"
+msgstr "Brasil (por defecto)"
+
+#: includes/wg-settings-page.php:175
+msgid "Choose Portuguese flag:"
+msgstr "Elige una bandera para portugués:"
+
+#: includes/wg-settings-page.php:172
+msgid "Panama"
+msgstr "Panamá"
+
+#: includes/wg-settings-page.php:171
+msgid "Puerto Rico"
+msgstr "Puerto Rico"
+
+#: includes/wg-settings-page.php:170
+msgid "Costa Rica"
+msgstr "Costa Rica"
+
+#: includes/wg-settings-page.php:169
+msgid "Nicaragua"
+msgstr "Nicaragua"
+
+#: includes/wg-settings-page.php:168
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#: includes/wg-settings-page.php:167
+msgid "Paraguay"
+msgstr "Paraguay"
+
+#: includes/wg-settings-page.php:166
+msgid "Honduras"
+msgstr " Honduras"
+
+#: includes/wg-settings-page.php:165
+msgid "Dominican Republic"
+msgstr "República Dominicana"
+
+#: includes/wg-settings-page.php:164
+msgid "Cuba"
+msgstr "Cuba"
+
+#: includes/wg-settings-page.php:163
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#: includes/wg-settings-page.php:162
+msgid "Ecuador"
+msgstr "Ecuador"
+
+#: includes/wg-settings-page.php:161
+msgid "Chile"
+msgstr "Chile"
+
+#: includes/wg-settings-page.php:160
+msgid "Venezuela"
+msgstr "Venezuela"
+
+#: includes/wg-settings-page.php:159
+msgid "Uruguay"
+msgstr "Uruguay"
+
+#: includes/wg-settings-page.php:158
+msgid "Bolivia"
+msgstr "Bolivia"
+
+#: includes/wg-settings-page.php:157
+msgid "Peru"
+msgstr "Perú"
+
+#: includes/wg-settings-page.php:156
+msgid "Colombia"
+msgstr "Colombia"
+
+#: includes/wg-settings-page.php:155
+msgid "Argentina"
+msgstr "Argentina"
+
+#: includes/wg-settings-page.php:154
+msgid "Mexico"
+msgstr "México"
+
+#: includes/wg-settings-page.php:153
+msgid "Spain (default)"
+msgstr "España (por defecto)"
+
+#: includes/wg-settings-page.php:152
+msgid "Choose Spanish flag:"
+msgstr "Elige una bandera para español:"
+
+#: includes/wg-settings-page.php:149
+msgid "Ireland"
+msgstr "Irlanda"
+
+#: includes/wg-settings-page.php:148
+msgid "Jamaica"
+msgstr "Jamaica"
+
+#: includes/wg-settings-page.php:147
+msgid "New Zealand"
+msgstr "Nueva Zelanda"
+
+#: includes/wg-settings-page.php:146
+msgid "Canada"
+msgstr "Canadá"
+
+#: includes/wg-settings-page.php:145
+msgid "Australia"
+msgstr "Australia"
+
+#: includes/wg-settings-page.php:144
+msgid "United States"
+msgstr "Estados Unidos"
+
+#: includes/wg-settings-page.php:143
+msgid "United Kingdom (default)"
+msgstr "Reino Unido (por defecto)"
+
+#: includes/wg-settings-page.php:142
+msgid "Choose English flag:"
+msgstr "Elige una bandera inglesa:"
+
+#: includes/wg-settings-page.php:139
+msgid "Change country flags"
+msgstr "Cambiar las banderas de los países"
+
+#: includes/wg-settings-page.php:137
+msgid "Circle"
+msgstr "Circular"
+
+#: includes/wg-settings-page.php:136
+msgid "Square"
+msgstr "Cuadrado"
+
+#: includes/wg-settings-page.php:134
+msgid "Rectangle mat"
+msgstr "Rectangular mate"
+
+#: includes/wg-settings-page.php:131
+msgid "Type of flags"
+msgstr "Tipos de banderas"
+
+#: includes/wg-settings-page.php:128
+msgid "Check if you want flags in the language button."
+msgstr "Marca si quieres banderas en el botón de idioma."
+
+#: includes/wg-settings-page.php:127
+msgid "With flags?"
+msgstr "¿Con banderas?"
+
+#: includes/wg-settings-page.php:124
+msgid "Check if you want the button to be a dropdown box."
+msgstr "Marca si quieres que el botón sea una caja desplegable."
+
+#: includes/wg-settings-page.php:123
+msgid "Dropdown?"
+msgstr "¿Desplegable?"
+
+#: includes/wg-settings-page.php:120
+msgid "Preview:"
+msgstr "Vista previa:"
+
+#: includes/wg-settings-page.php:119 includes/wg-settings-page.php:202
+#: includes/wg-settings-page.php:222 includes/wg-settings-page.php:236
+#: includes/wg-settings-page.php:248
+msgid "(Optional)"
+msgstr "(Opcional)"
+
+#: includes/wg-settings-page.php:119
+msgid "Language button appearance"
+msgstr "Apariencia del botón de idioma"
+
+#: includes/wg-settings-page.php:116
+msgid "On the Starter plan, you can only choose one language. If you want to use more than 1 language, please %supgrade your plan%s."
+msgstr "Sólo puede elegir un idioma en el plan de inicio. Si quieres utilizar más de 1 idioma, por favor, %smejora tu plan%s."
+
+#: includes/wg-settings-page.php:116
+msgid "On the free plan, you can only choose one language and a maximum of 2000 words. If you want to use more than 1 language and 2000 words, please %supgrade your plan%s."
+msgstr "En el plan gratuito, puede elegir un sólo idioma y un máximo de 2000 palabras. Si quieres utilizar más de 1 idioma y más de 2000 palabras, por favor, %smejora tu plan%s."
+
+#: includes/wg-settings-page.php:115
+msgid "Write the two-letter codes, separated by a comma. Supported languages can be found %shere%s."
+msgstr "Escribe las dos letras de los códigos, separados por una coma. Los idiomas permitidos se pueden encontrar %saquí%s."
+
+#: includes/wg-settings-page.php:115
+msgid "Destination Languages"
+msgstr "Idiomas de destino"
+
+#: includes/wg-settings-page.php:110
+msgid "Urdu"
+msgstr "Urdú"
+
+#: includes/wg-settings-page.php:109
+msgid "Hindi"
+msgstr "Hindi"
+
+#: includes/wg-settings-page.php:108
+msgid "Japanese"
+msgstr "Japonés"
+
+#: includes/wg-settings-page.php:107
+msgid "Estonian"
+msgstr "Estonio"
+
+#: includes/wg-settings-page.php:106
+msgid "Swedish"
+msgstr "Sueco"
+
+#: includes/wg-settings-page.php:105
+msgid "Czech"
+msgstr "Checo"
+
+#: includes/wg-settings-page.php:104
+msgid "Croatian"
+msgstr "Croata"
+
+#: includes/wg-settings-page.php:103
+msgid "Finnish"
+msgstr "Finlandés"
+
+#: includes/wg-settings-page.php:102
+msgid "Ukrainian"
+msgstr "Ucraniano"
+
+#: includes/wg-settings-page.php:101
+msgid "Uzbek"
+msgstr "Uzbeko"
+
+#: includes/wg-settings-page.php:100
+msgid "Turkish"
+msgstr "Turco"
+
+#: includes/wg-settings-page.php:99
+msgid "Thai"
+msgstr "Tailandés"
+
+#: includes/wg-settings-page.php:98
+msgid "Tajik"
+msgstr "Tayico"
+
+#: includes/wg-settings-page.php:97
+msgid "Swahili"
+msgstr "Swahili"
+
+#: includes/wg-settings-page.php:96
+msgid "Slovenian"
+msgstr "Esloveno"
+
+#: includes/wg-settings-page.php:95
+msgid "Slovak"
+msgstr "Eslovaco"
+
+#: includes/wg-settings-page.php:94
+msgid "Serbian"
+msgstr "Serbio"
+
+#: includes/wg-settings-page.php:93
+msgid "Romanian"
+msgstr "Rumano"
+
+#: includes/wg-settings-page.php:92
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: includes/wg-settings-page.php:91
+msgid "Polish"
+msgstr "Polaco"
+
+#: includes/wg-settings-page.php:90
+msgid "Persian"
+msgstr "Persa"
+
+#: includes/wg-settings-page.php:89
+msgid "Norwegian"
+msgstr "Noruego"
+
+#: includes/wg-settings-page.php:88
+msgid "Mongolian"
+msgstr "Mongol"
+
+#: includes/wg-settings-page.php:87
+msgid "Macedonian"
+msgstr "Macedonio"
+
+#: includes/wg-settings-page.php:86
+msgid "Maltese"
+msgstr "Maltés"
+
+#: includes/wg-settings-page.php:85
+msgid "Malay"
+msgstr "Malayo"
+
+#: includes/wg-settings-page.php:84
+msgid "Malagasy"
+msgstr "Madagascarí"
+
+#: includes/wg-settings-page.php:83
+msgid "Lithuanian"
+msgstr "Lituano"
+
+#: includes/wg-settings-page.php:82
+msgid "Latvian"
+msgstr "Letón"
+
+#: includes/wg-settings-page.php:81
+msgid "Korean"
+msgstr "Coreano"
+
+#: includes/wg-settings-page.php:80
+msgid "Kyrgyz"
+msgstr "Kirguís"
+
+#: includes/wg-settings-page.php:79
+msgid "Catalan"
+msgstr "Catalán"
+
+#: includes/wg-settings-page.php:78
+msgid "Kazakh"
+msgstr "Kazajo"
+
+#: includes/wg-settings-page.php:77
+msgid "Icelandic"
+msgstr "Islandés"
+
+#: includes/wg-settings-page.php:76
+msgid "Italian"
+msgstr "Italiano"
+
+#: includes/wg-settings-page.php:75
+msgid "Irish"
+msgstr "Irlandés"
+
+#: includes/wg-settings-page.php:74
+msgid "Indonesian"
+msgstr "Indonesio"
+
+#: includes/wg-settings-page.php:73
+msgid "Hebrew"
+msgstr "Hebreo"
+
+#: includes/wg-settings-page.php:72
+msgid "Danish"
+msgstr "Danés"
+
+#: includes/wg-settings-page.php:71
+msgid "Georgian"
+msgstr "Georgiano"
+
+#: includes/wg-settings-page.php:70
+msgid "Greek"
+msgstr "Griego"
+
+#: includes/wg-settings-page.php:69
+msgid "Dutch"
+msgstr "Holandés"
+
+#: includes/wg-settings-page.php:68
+msgid "Haitian"
+msgstr "Haitiano"
+
+#: includes/wg-settings-page.php:67
+msgid "Hungarian"
+msgstr "Húngaro"
+
+#: includes/wg-settings-page.php:66
+msgid "Vietnamese"
+msgstr "Vietnamita"
+
+#: includes/wg-settings-page.php:65
+msgid "Bosnian"
+msgstr "Bosnio"
+
+#: includes/wg-settings-page.php:64
+msgid "Bulgarian"
+msgstr "Búlgaro"
+
+#: includes/wg-settings-page.php:63
+msgid "Belarusian"
+msgstr "Bielorruso"
+
+#: includes/wg-settings-page.php:62
+msgid "Basque"
+msgstr "Vasco"
+
+#: includes/wg-settings-page.php:61
+msgid "Afrikaans"
+msgstr "Africano"
+
+#: includes/wg-settings-page.php:60
+msgid "Azerbaijani"
+msgstr "Azerbaiyano"
+
+#: includes/wg-settings-page.php:59
+msgid "Armenian"
+msgstr "Armenio"
+
+#: includes/wg-settings-page.php:58
+msgid "Arabic"
+msgstr "Árabe"
+
+#: includes/wg-settings-page.php:57
+msgid "Albanian"
+msgstr "Albanés"
+
+#: includes/wg-settings-page.php:56
+msgid "Spanish"
+msgstr "Castellano"
+
+#: includes/wg-settings-page.php:55
+msgid "German"
+msgstr "Alemán"
+
+#: includes/wg-settings-page.php:54
+msgid "Russian"
+msgstr "Ruso"
+
+#: includes/wg-settings-page.php:53
+msgid "Traditional Chinese"
+msgstr "Chino tradicional"
+
+#: includes/wg-settings-page.php:52
+msgid "Simplified Chinese"
+msgstr "Chino simplificado"
+
+#: includes/wg-settings-page.php:50
+msgid "French"
+msgstr "Francés"
+
+#: includes/wg-settings-page.php:51
+msgid "English"
+msgstr "Inglés"
+
+#: includes/wg-settings-page.php:47
+msgid "What is the original (current) language of your website?"
+msgstr "¿Cuál es el idioma original (actual) de tu sitio web?"
+
+#: includes/wg-settings-page.php:47
+msgid "Original Language"
+msgstr "Idioma original"
+
+#: includes/wg-settings-page.php:43
+msgid "Log in to %sWeglot%s to get your API key."
+msgstr "Accede a %sWeglot%s para conseguir tu clave de API."
+
+#: includes/wg-settings-page.php:43
+msgid "API Key"
+msgstr "Clave de la API"
+
+#: includes/wg-settings-page.php:40
+msgid "Main configuration"
+msgstr "Configuración principal"
+
+#: includes/wg-settings-page.php:29
+msgid "Next step, edit your translations directly in your Weglot account."
+msgstr "Próximo paso: editar tus traducciones directamente en tu cuenta de Weglot."
+
+#: includes/wg-settings-page.php:28
+msgid "Go on my front page."
+msgstr "Ir a mi página principal."
+
+#: includes/wg-settings-page.php:27
+msgid "Go on your website, there is a language switcher. Try it :)"
+msgstr "Ve a tu sitio web, hay un selector de idioma, Pruébalo :)"
+
+#: includes/wg-settings-page.php:26
+msgid "Well done! Your website is now multilingual."
+msgstr "¡Bien hecho! Tu sitio web es ahora multilingüe."
+
+#: includes/wg-settings-page.php:25
+msgid "Close"
+msgstr "Cerrar"
+
+#: includes/wg-settings-page.php:18
+msgid "To reactivate the service, please %supgrade your plan%s."
+msgstr "Para reactivar el servicio, por favor, %smejora tu plan%s."
+
+#: includes/wg-settings-page.php:17
+msgid "Weglot Translate service is not active because you have reached the end of the trial period."
+msgstr "El servicio de Weglot Translate no está activado porque ha terminado el periodo de prueba."
+
+#: WeglotWidget.php:41
+msgid "Title:"
+msgstr "Titulo:"
+
+#. #-#-#-#-#  tmp-weglot.pot (Weglot Translate 1.4.5)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: WeglotWidget.php:6 WeglotWidget.php:10
+msgid "Weglot Translate"
+msgstr "Weglot Translate"
