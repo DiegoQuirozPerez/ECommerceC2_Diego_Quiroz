@@ -2,7 +2,6 @@
 namespace app\includes;
 
 use app\includes\common\TPLang;
-use app\includes\common\TPSiteAjaxListener;
 use app\includes\controllers\admin\media_buttons\TPHotelsButtonsController;
 use app\includes\controllers\admin\media_buttons\TPRailwayButtonsController;
 use app\includes\controllers\admin\menu\TPHotelsController;
@@ -21,20 +20,20 @@ use app\includes\models\admin\TPHotelsTypeModel;
 class TPLoader extends \core\TPOLoader{
     public function __construct(){
         parent::__construct();
-	    add_action('widgets_init', array(&$this, 'registerWidget'));
+
     }
 
     protected function admin()
     {
+
+
         // TODO: Implement admin() method.
         // Admin menu
         new controllers\admin\menu\TPDashboardController();
         new controllers\admin\menu\TPAutoReplacLinksController();
         new controllers\admin\menu\TPFlightTicketsController();
         new TPHotelsController();
-        if (TPLang::getLang() == TPLang::getLangRU()){
-            new TPRailwayController();
-        }
+        new TPRailwayController();
         new controllers\admin\menu\TPWidgetsController();
         new controllers\admin\menu\TPSearchFormsController();
         //new controllers\admin\menu\TPStatisticController();
@@ -63,6 +62,8 @@ class TPLoader extends \core\TPOLoader{
 
 
     }
+
+
     protected function site()
     {
         // TODO: Implement site() method.
@@ -117,20 +118,9 @@ class TPLoader extends \core\TPOLoader{
         // TODO: Implement all() method.
 
         new \app\includes\TPLoaderScripts();
-        new TPSiteAjaxListener();
         //new controllers\admin\menu\TPAdminBarMenuController();
         //Загрузка спецпредложения
         //\app\includes\models\site\shortcodes\TPSpecialOfferShortcodeModel::modelHooks();
-    }
-
-    public function registerWidget(){
-	    register_widget( 'app\includes\widgets\TPFlightsTablesWidget' );
-	    register_widget( 'app\includes\widgets\TPHotelsTablesWidget' );
-	    register_widget( 'app\includes\widgets\TPSearchFormWidget' );
-	    register_widget( 'app\includes\widgets\TPWidgetsWidget' );
-	    if (TPLang::getLang() == TPLang::getLangRU()){
-		    register_widget( 'app\includes\widgets\TPRailwayTablesWidget' );
-	    }
 
     }
 
@@ -149,13 +139,13 @@ class TPLoader extends \core\TPOLoader{
                         <div class="TP-Activate_button_container">
                             <div class="TP-Activate_button_border">
                                 <div class="TP-Activate_button">
-                                    <a href="admin.php?page=tp_control_wizard">'._x('Set details and enable plugin features', 'tp_plugin_loaded_admin_notice_btn_wizard_label', TPOPlUGIN_TEXTDOMAIN).'</a>
+                                    <a href="admin.php?page=tp_control_wizard">'._x('tp_plugin_loaded_admin_notice_btn_wizard_label', '(Set details and enable plugin features)', TPOPlUGIN_TEXTDOMAIN).'</a>
                                 </div>
                             </div>
                         </div>
                         <div class="TP-Activate_description">
-                            '._x('Welcome! Travelpayouts plugin is almost ready.', 'tp_plugin_loaded_admin_notice_paragraph_1', TPOPlUGIN_TEXTDOMAIN).'<br/>'
-                            ._x('Enter your Travelpayouts authorization details and start earning now.', 'tp_plugin_loaded_admin_notice_paragraph_2', TPOPlUGIN_TEXTDOMAIN)
+                            '._x('tp_plugin_loaded_admin_notice_paragraph_1', '(Welcome! Travelpayouts plugin is almost ready.)', TPOPlUGIN_TEXTDOMAIN).'<br/>'
+                            ._x('tp_plugin_loaded_admin_notice_paragraph_2', '(Enter your Travelpayouts authorization details and start earning now.)', TPOPlUGIN_TEXTDOMAIN)
                             .'</div>
                     </div>'
                 );

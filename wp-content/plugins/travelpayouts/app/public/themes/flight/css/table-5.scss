@@ -577,7 +577,9 @@ a.paginate_button:hover {
     position: absolute;
     top: 32%;
   }
-
+  .TP-AirlineLogo {
+    top: 0 !important;
+  }
   .TPPopUpButtonTable {
     display: none !important;
   }
@@ -609,7 +611,7 @@ a.paginate_button:hover {
   .TP-rwd-table tbody tr td img {
     max-height: 35px;
     vertical-align: middle;
-    max-width: 50%;
+    max-width: 30%;
     display: inline-block;
     width: auto;
   }

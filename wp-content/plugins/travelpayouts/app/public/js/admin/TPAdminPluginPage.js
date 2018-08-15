@@ -599,7 +599,6 @@ jQuery(function($){
                     doc.find('.TPLangFieldsLi').text("RU");
                     doc.find('.TPFieldTitleCaseDiv').show();
                     TPFieldHostSelect("1");
-                    $('.tabs-local-field-item-railway').show();
                     break;
                 case "2":
                     //en
@@ -607,7 +606,7 @@ jQuery(function($){
                     doc.find('.TPLangFieldsLi').text("EN");
                     doc.find('.TPFieldTitleCaseDiv').hide();
                     TPFieldHostSelect("2");
-                    $('.tabs-local-field-item-railway').hide();
+
                     break;
 
                 case "3":
@@ -616,14 +615,11 @@ jQuery(function($){
                     doc.find('.TPLangFieldsLi').text("TH");
                     doc.find('.TPFieldTitleCaseDiv').hide();
                     TPFieldHostSelect("3");
-                    $('.tabs-local-field-item-railway').hide();
                     break;
             }
         });
 
     }
-    
-
 
     /**
      *
@@ -662,15 +658,12 @@ jQuery(function($){
     switch ($('select.TPFieldLocalization').val()){
         case "1":
             doc.find('.TPFieldTitleCaseDiv').show();
-            $('.tabs-local-field-item-railway').show();
             break;
         case "2":
             doc.find('.TPFieldTitleCaseDiv').hide();
-            $('.tabs-local-field-item-railway').hide();
             break;
         case "3":
             doc.find('.TPFieldTitleCaseDiv').hide();
-            $('.tabs-local-field-item-railway').hide();
             break;
     }
     /** **/

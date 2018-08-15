@@ -27,8 +27,7 @@ class TPPopularRoutesFromCityShortcodeModel extends TPFlightShortcodeModel{
             'subid' => '',
             'filter_flight_number' => false,
             'filter_airline' => false,
-            'return_url' => false,
-            'widget' => 0
+            'return_url' => false
         );
         extract(wp_parse_args($args, $defaults), EXTR_SKIP);
         if ($return_url == 1){
@@ -52,7 +51,7 @@ class TPPopularRoutesFromCityShortcodeModel extends TPFlightShortcodeModel{
             if(TPOPlUGIN_ERROR_LOG)
                 error_log("{$method} cache");
             if (false === ($return = get_transient($this->cacheKey('9',
-                    $origin, $widget)))) {
+                    $origin)))) {
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache false");
                 $return = self::$TPRequestApi->get_popular_routes_from_city($attr);
@@ -70,7 +69,7 @@ class TPPopularRoutesFromCityShortcodeModel extends TPFlightShortcodeModel{
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache secund = ".$cacheSecund);
                 set_transient($this->cacheKey('9',
-                    $origin, $widget), $return, $cacheSecund);
+                    $origin), $return, $cacheSecund);
             }
         } else {
             $return = self::$TPRequestApi->get_popular_routes_from_city($attr);

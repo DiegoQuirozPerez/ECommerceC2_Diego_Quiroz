@@ -1227,11 +1227,10 @@ class TPShortcodeView {
                  */
             }
             if(isset($_GET['searches_hotel'])){
-                $white_label = \app\includes\TPPlugin::$options['account']['white_label_hotel'];
+                $white_label = \app\includes\TPPlugin::$options['account']['white_label'];
                 if(!empty($white_label)){
                     if(strpos($white_label, 'http') === false){
                         $white_label = 'http://'.$white_label;
-                        $white_label =  rtrim($white_label, '/' ).'/hotels';
                     }
                 }else{
                     $white_label = \app\includes\common\TPHostURL::getHostSearchLinkWhenEmptyWhiteLabel(2);
@@ -1272,15 +1271,7 @@ class TPShortcodeView {
 
         extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
-        switch($type){
-            case 1:
-                $white_label = \app\includes\TPPlugin::$options['account']['white_label'];
-                break;
-            case 2:
-                $white_label = \app\includes\TPPlugin::$options['account']['white_label_hotel'];
-                break;
-        }
-
+        $white_label = \app\includes\TPPlugin::$options['account']['white_label'];
         if(!empty($white_label)){
             if(strpos($white_label, 'http') === false){
                 $white_label = 'http://'.$white_label;

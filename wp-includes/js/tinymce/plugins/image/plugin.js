@@ -81,52 +81,9 @@ var defineGlobal = function (id, ref) {
   define(id, [], function () { return ref; });
 };
 /*jsc
-["tinymce.plugins.image.Plugin","tinymce.core.PluginManager","tinymce.core.util.Tools","tinymce.plugins.image.ui.Dialog","global!tinymce.util.Tools.resolve","global!document","global!Math","global!RegExp","tinymce.core.Env","tinymce.core.ui.Factory","tinymce.core.util.JSON","tinymce.core.util.XHR","tinymce.plugins.image.core.Uploader","tinymce.plugins.image.core.Utils","tinymce.core.util.Promise"]
+["tinymce.plugins.image.Plugin","tinymce.core.Env","tinymce.core.PluginManager","tinymce.core.util.JSON","tinymce.core.util.Tools","tinymce.core.util.XHR","global!tinymce.util.Tools.resolve"]
 jsc*/
 defineGlobal("global!tinymce.util.Tools.resolve", tinymce.util.Tools.resolve);
-/**
- * ResolveGlobal.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
-define(
-  'tinymce.core.PluginManager',
-  [
-    'global!tinymce.util.Tools.resolve'
-  ],
-  function (resolve) {
-    return resolve('tinymce.PluginManager');
-  }
-);
-
-/**
- * ResolveGlobal.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
-define(
-  'tinymce.core.util.Tools',
-  [
-    'global!tinymce.util.Tools.resolve'
-  ],
-  function (resolve) {
-    return resolve('tinymce.util.Tools');
-  }
-);
-
-defineGlobal("global!document", document);
-defineGlobal("global!Math", Math);
-defineGlobal("global!RegExp", RegExp);
 /**
  * ResolveGlobal.js
  *
@@ -158,12 +115,12 @@ define(
  */
 
 define(
-  'tinymce.core.ui.Factory',
+  'tinymce.core.PluginManager',
   [
     'global!tinymce.util.Tools.resolve'
   ],
   function (resolve) {
-    return resolve('tinymce.ui.Factory');
+    return resolve('tinymce.PluginManager');
   }
 );
 
@@ -198,12 +155,12 @@ define(
  */
 
 define(
-  'tinymce.core.util.XHR',
+  'tinymce.core.util.Tools',
   [
     'global!tinymce.util.Tools.resolve'
   ],
   function (resolve) {
-    return resolve('tinymce.util.XHR');
+    return resolve('tinymce.util.Tools');
   }
 );
 
@@ -218,17 +175,17 @@ define(
  */
 
 define(
-  'tinymce.core.util.Promise',
+  'tinymce.core.util.XHR',
   [
     'global!tinymce.util.Tools.resolve'
   ],
   function (resolve) {
-    return resolve('tinymce.util.Promise');
+    return resolve('tinymce.util.XHR');
   }
 );
 
 /**
- * Uploader.js
+ * Plugin.js
  *
  * Released under LGPL License.
  * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
@@ -238,329 +195,96 @@ define(
  */
 
 /**
- * This is basically cut down version of tinymce.core.file.Uploader, which we could use directly
- * if it wasn't marked as private.
+ * This class contains all core logic for the image plugin.
  *
- * @class tinymce.image.core.Uploader
+ * @class tinymce.image.Plugin
  * @private
  */
 define(
-  'tinymce.plugins.image.core.Uploader',
+  'tinymce.plugins.image.Plugin',
   [
-    'tinymce.core.util.Promise',
-    'tinymce.core.util.Tools',
-    'global!document'
-  ],
-  function (Promise, Tools, document) {
-    return function (settings) {
-      var noop = function () {};
-
-      function pathJoin(path1, path2) {
-        if (path1) {
-          return path1.replace(/\/$/, '') + '/' + path2.replace(/^\//, '');
-        }
-
-        return path2;
-      }
-
-      function defaultHandler(blobInfo, success, failure, progress) {
-        var xhr, formData;
-
-        xhr = new XMLHttpRequest();
-        xhr.open('POST', settings.url);
-        xhr.withCredentials = settings.credentials;
-
-        xhr.upload.onprogress = function (e) {
-          progress(e.loaded / e.total * 100);
-        };
-
-        xhr.onerror = function () {
-          failure("Image upload failed due to a XHR Transport error. Code: " + xhr.status);
-        };
-
-        xhr.onload = function () {
-          var json;
-
-          if (xhr.status < 200 || xhr.status >= 300) {
-            failure("HTTP Error: " + xhr.status);
-            return;
-          }
-
-          json = JSON.parse(xhr.responseText);
-
-          if (!json || typeof json.location != "string") {
-            failure("Invalid JSON: " + xhr.responseText);
-            return;
-          }
-
-          success(pathJoin(settings.basePath, json.location));
-        };
-
-        formData = new FormData();
-        formData.append('file', blobInfo.blob(), blobInfo.filename());
-
-        xhr.send(formData);
-      }
-
-      function uploadBlob(blobInfo, handler) {
-        return new Promise(function (resolve, reject) {
-          try {
-            handler(blobInfo, resolve, reject, noop);
-          } catch (ex) {
-            reject(ex.message);
-          }
-        });
-      }
-
-      function isDefaultHandler(handler) {
-        return handler === defaultHandler;
-      }
-
-      function upload(blobInfo) {
-        return (!settings.url && isDefaultHandler(settings.handler)) ? Promise.reject("Upload url missng from the settings.") : uploadBlob(blobInfo, settings.handler);
-      }
-
-      settings = Tools.extend({
-        credentials: false,
-        handler: defaultHandler
-      }, settings);
-
-      return {
-        upload: upload
-      };
-    };
-  }
-);
-/**
- * Utils.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
-/**
- * @class tinymce.image.core.Utils
- * @private
- */
-define(
-  'tinymce.plugins.image.core.Utils',
-  [
-    'tinymce.core.util.Tools',
-    'global!Math',
-    'global!document'
-  ],
-  function (Tools, Math, document) {
-
-    var getImageSize = function (url, callback) {
-      var img = document.createElement('img');
-
-      function done(width, height) {
-        if (img.parentNode) {
-          img.parentNode.removeChild(img);
-        }
-
-        callback({ width: width, height: height });
-      }
-
-      img.onload = function () {
-        done(Math.max(img.width, img.clientWidth), Math.max(img.height, img.clientHeight));
-      };
-
-      img.onerror = function () {
-        done();
-      };
-
-      var style = img.style;
-      style.visibility = 'hidden';
-      style.position = 'fixed';
-      style.bottom = style.left = 0;
-      style.width = style.height = 'auto';
-
-      document.body.appendChild(img);
-      img.src = url;
-    };
-
-
-    var buildListItems = function (inputList, itemCallback, startItems) {
-      function appendItems(values, output) {
-        output = output || [];
-
-        Tools.each(values, function (item) {
-          var menuItem = { text: item.text || item.title };
-
-          if (item.menu) {
-            menuItem.menu = appendItems(item.menu);
-          } else {
-            menuItem.value = item.value;
-            itemCallback(menuItem);
-          }
-
-          output.push(menuItem);
-        });
-
-        return output;
-      }
-
-      return appendItems(inputList, startItems || []);
-    };
-
-    var removePixelSuffix = function (value) {
-      if (value) {
-        value = value.replace(/px$/, '');
-      }
-      return value;
-    };
-
-    var addPixelSuffix = function (value) {
-      if (value.length > 0 && /^[0-9]+$/.test(value)) {
-        value += 'px';
-      }
-      return value;
-    };
-
-    var mergeMargins = function (css) {
-      if (css.margin) {
-
-        var splitMargin = css.margin.split(" ");
-
-        switch (splitMargin.length) {
-          case 1: //margin: toprightbottomleft;
-            css['margin-top'] = css['margin-top'] || splitMargin[0];
-            css['margin-right'] = css['margin-right'] || splitMargin[0];
-            css['margin-bottom'] = css['margin-bottom'] || splitMargin[0];
-            css['margin-left'] = css['margin-left'] || splitMargin[0];
-            break;
-          case 2: //margin: topbottom rightleft;
-            css['margin-top'] = css['margin-top'] || splitMargin[0];
-            css['margin-right'] = css['margin-right'] || splitMargin[1];
-            css['margin-bottom'] = css['margin-bottom'] || splitMargin[0];
-            css['margin-left'] = css['margin-left'] || splitMargin[1];
-            break;
-          case 3: //margin: top rightleft bottom;
-            css['margin-top'] = css['margin-top'] || splitMargin[0];
-            css['margin-right'] = css['margin-right'] || splitMargin[1];
-            css['margin-bottom'] = css['margin-bottom'] || splitMargin[2];
-            css['margin-left'] = css['margin-left'] || splitMargin[1];
-            break;
-          case 4: //margin: top right bottom left;
-            css['margin-top'] = css['margin-top'] || splitMargin[0];
-            css['margin-right'] = css['margin-right'] || splitMargin[1];
-            css['margin-bottom'] = css['margin-bottom'] || splitMargin[2];
-            css['margin-left'] = css['margin-left'] || splitMargin[3];
-        }
-        delete css.margin;
-      }
-      return css;
-    };
-
-    return {
-      getImageSize: getImageSize,
-      buildListItems: buildListItems,
-      removePixelSuffix: removePixelSuffix,
-      addPixelSuffix: addPixelSuffix,
-      mergeMargins: mergeMargins
-    };
-  }
-);
-
-/**
- * Dialog.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
-/**
- * @class tinymce.image.ui.Dialog
- * @private
- */
-define(
-  'tinymce.plugins.image.ui.Dialog',
-  [
-    'global!document',
-    'global!Math',
-    'global!RegExp',
     'tinymce.core.Env',
-    'tinymce.core.ui.Factory',
+    'tinymce.core.PluginManager',
     'tinymce.core.util.JSON',
     'tinymce.core.util.Tools',
-    'tinymce.core.util.XHR',
-    'tinymce.plugins.image.core.Uploader',
-    'tinymce.plugins.image.core.Utils'
+    'tinymce.core.util.XHR'
   ],
-  function (document, Math, RegExp, Env, Factory, JSON, Tools, XHR, Uploader, Utils) {
+  function (Env, PluginManager, JSON, Tools, XHR) {
+    PluginManager.add('image', function (editor) {
+      function getImageSize(url, callback) {
+        var img = document.createElement('img');
 
-    return function (editor) {
-      function createImageList(callback) {
-        var imageList = editor.settings.image_list;
+        function done(width, height) {
+          if (img.parentNode) {
+            img.parentNode.removeChild(img);
+          }
 
-        if (typeof imageList == "string") {
-          XHR.send({
-            url: imageList,
-            success: function (text) {
-              callback(JSON.parse(text));
-            }
-          });
-        } else if (typeof imageList == "function") {
-          imageList(callback);
-        } else {
-          callback(imageList);
+          callback({ width: width, height: height });
         }
+
+        img.onload = function () {
+          done(Math.max(img.width, img.clientWidth), Math.max(img.height, img.clientHeight));
+        };
+
+        img.onerror = function () {
+          done();
+        };
+
+        var style = img.style;
+        style.visibility = 'hidden';
+        style.position = 'fixed';
+        style.bottom = style.left = 0;
+        style.width = style.height = 'auto';
+
+        document.body.appendChild(img);
+        img.src = url;
+      }
+
+      function buildListItems(inputList, itemCallback, startItems) {
+        function appendItems(values, output) {
+          output = output || [];
+
+          Tools.each(values, function (item) {
+            var menuItem = { text: item.text || item.title };
+
+            if (item.menu) {
+              menuItem.menu = appendItems(item.menu);
+            } else {
+              menuItem.value = item.value;
+              itemCallback(menuItem);
+            }
+
+            output.push(menuItem);
+          });
+
+          return output;
+        }
+
+        return appendItems(inputList, startItems || []);
+      }
+
+      function createImageList(callback) {
+        return function () {
+          var imageList = editor.settings.image_list;
+
+          if (typeof imageList == "string") {
+            XHR.send({
+              url: imageList,
+              success: function (text) {
+                callback(JSON.parse(text));
+              }
+            });
+          } else if (typeof imageList == "function") {
+            imageList(callback);
+          } else {
+            callback(imageList);
+          }
+        };
       }
 
       function showDialog(imageList) {
-        var win, data = {}, imgElm, figureElm, dom = editor.dom, settings = editor.settings;
-        var width, height, imageListCtrl, classListCtrl, imageDimensions = settings.image_dimensions !== false;
-
-
-        function onFileInput() {
-          var Throbber = Factory.get('Throbber');
-          var throbber = new Throbber(win.getEl());
-          var file = this.value();
-
-          var uploader = new Uploader({
-            url: settings.images_upload_url,
-            basePath: settings.images_upload_base_path,
-            credentials: settings.images_upload_credentials,
-            handler: settings.images_upload_handler
-          });
-
-          // we do not need to add this to editors blobCache, so we fake bare minimum
-          var blobInfo = editor.editorUpload.blobCache.create({
-            blob: file,
-            name: file.name ? file.name.replace(/\.[^\.]+$/, '') : null, // strip extension
-            base64: 'data:image/fake;base64,=' // without this create() will throw exception
-          });
-
-          var finalize = function () {
-            throbber.hide();
-            URL.revokeObjectURL(blobInfo.blobUri()); // in theory we could fake blobUri too, but until it's legitimate, we have too revoke it manually
-          };
-
-          throbber.show();
-
-          return uploader.upload(blobInfo).then(function (url) {
-            var src = win.find('#src');
-            src.value(url);
-            win.find('tabpanel')[0].activateTab(0); // switch to General tab
-            src.fire('change'); // this will invoke onSrcChange (and any other handlers, if any).
-            finalize();
-            return url;
-          }, function (err) {
-            editor.windowManager.alert(err);
-            finalize();
-          });
-        }
-
-        function isTextBlock(node) {
-          return editor.schema.getTextBlockElements()[node.nodeName];
-        }
+        var win, data = {}, dom = editor.dom, imgElm, figureElm;
+        var width, height, imageListCtrl, classListCtrl, imageDimensions = editor.settings.image_dimensions !== false;
 
         function recalcSize() {
           var widthCtrl, heightCtrl, newWidth, newHeight;
@@ -595,90 +319,32 @@ define(
           height = newHeight;
         }
 
-        function updateStyle() {
-          if (!editor.settings.image_advtab) {
-            return;
-          }
-
-          var data = win.toJSON(),
-            css = dom.parseStyle(data.style);
-
-          css = Utils.mergeMargins(css);
-
-          if (data.vspace) {
-            css['margin-top'] = css['margin-bottom'] = Utils.addPixelSuffix(data.vspace);
-          }
-          if (data.hspace) {
-            css['margin-left'] = css['margin-right'] = Utils.addPixelSuffix(data.hspace);
-          }
-          if (data.border) {
-            css['border-width'] = Utils.addPixelSuffix(data.border);
-          }
-
-          win.find('#style').value(dom.serializeStyle(dom.parseStyle(dom.serializeStyle(css))));
-        }
-
-        function updateVSpaceHSpaceBorder() {
-          if (!editor.settings.image_advtab) {
-            return;
-          }
-
-          var data = win.toJSON(),
-            css = dom.parseStyle(data.style);
-
-          win.find('#vspace').value("");
-          win.find('#hspace').value("");
-
-          css = Utils.mergeMargins(css);
-
-          //Move opposite equal margins to vspace/hspace field
-          if ((css['margin-top'] && css['margin-bottom']) || (css['margin-right'] && css['margin-left'])) {
-            if (css['margin-top'] === css['margin-bottom']) {
-              win.find('#vspace').value(Utils.removePixelSuffix(css['margin-top']));
-            } else {
-              win.find('#vspace').value('');
-            }
-            if (css['margin-right'] === css['margin-left']) {
-              win.find('#hspace').value(Utils.removePixelSuffix(css['margin-right']));
-            } else {
-              win.find('#hspace').value('');
-            }
-          }
-
-          //Move border-width
-          if (css['border-width']) {
-            win.find('#border').value(Utils.removePixelSuffix(css['border-width']));
-          }
-
-          win.find('#style').value(dom.serializeStyle(dom.parseStyle(dom.serializeStyle(css))));
-        }
-
-        function waitLoad(imgElm) {
-          function selectImage() {
-            imgElm.onload = imgElm.onerror = null;
-
-            if (editor.selection) {
-              editor.selection.select(imgElm);
-              editor.nodeChanged();
-            }
-          }
-
-          imgElm.onload = function () {
-            if (!data.width && !data.height && imageDimensions) {
-              dom.setAttribs(imgElm, {
-                width: imgElm.clientWidth,
-                height: imgElm.clientHeight
-              });
-            }
-
-            selectImage();
-          };
-
-          imgElm.onerror = selectImage;
-        }
-
         function onSubmitForm() {
           var figureElm, oldImg;
+
+          function waitLoad(imgElm) {
+            function selectImage() {
+              imgElm.onload = imgElm.onerror = null;
+
+              if (editor.selection) {
+                editor.selection.select(imgElm);
+                editor.nodeChanged();
+              }
+            }
+
+            imgElm.onload = function () {
+              if (!data.width && !data.height && imageDimensions) {
+                dom.setAttribs(imgElm, {
+                  width: imgElm.clientWidth,
+                  height: imgElm.clientHeight
+                });
+              }
+
+              selectImage();
+            };
+
+            imgElm.onerror = selectImage;
+          }
 
           updateStyle();
           recalcSize();
@@ -721,15 +387,9 @@ define(
           editor.undoManager.transact(function () {
             if (!data.src) {
               if (imgElm) {
-                var elm = dom.is(imgElm.parentNode, 'figure.image') ? imgElm.parentNode : imgElm;
-                dom.remove(elm);
+                dom.remove(imgElm);
                 editor.focus();
                 editor.nodeChanged();
-
-                if (dom.isEmpty(editor.getBody())) {
-                  editor.setContent('');
-                  editor.selection.setCursorLocation();
-                }
               }
 
               return;
@@ -754,19 +414,19 @@ define(
             if (data.caption === false) {
               if (dom.is(imgElm.parentNode, 'figure.image')) {
                 figureElm = imgElm.parentNode;
-                dom.setAttrib(imgElm, 'contenteditable', null);
                 dom.insertAfter(imgElm, figureElm);
                 dom.remove(figureElm);
-                editor.selection.select(imgElm);
-                editor.nodeChanged();
               }
+            }
+
+            function isTextBlock(node) {
+              return editor.schema.getTextBlockElements()[node.nodeName];
             }
 
             if (data.caption === true) {
               if (!dom.is(imgElm.parentNode, 'figure.image')) {
                 oldImg = imgElm;
                 imgElm = imgElm.cloneNode(true);
-                imgElm.contentEditable = true;
                 figureElm = dom.create('figure', { 'class': 'image' });
                 figureElm.appendChild(imgElm);
                 figureElm.appendChild(dom.create('figcaption', { contentEditable: true }, 'Caption'));
@@ -789,7 +449,15 @@ define(
           });
         }
 
-        function onSrcChange(e) {
+        function removePixelSuffix(value) {
+          if (value) {
+            value = value.replace(/px$/, '');
+          }
+
+          return value;
+        }
+
+        function srcChange(e) {
           var srcURL, prependURL, absoluteURLPattern, meta = e.meta || {};
 
           if (imageListCtrl) {
@@ -812,7 +480,7 @@ define(
 
             this.value(srcURL);
 
-            Utils.getImageSize(editor.documentBaseURI.toAbsolute(this.value()), function (data) {
+            getImageSize(editor.documentBaseURI.toAbsolute(this.value()), function (data) {
               if (data.width && data.height && imageDimensions) {
                 width = data.width;
                 height = data.height;
@@ -860,7 +528,7 @@ define(
           imageListCtrl = {
             type: 'listbox',
             label: 'Image list',
-            values: Utils.buildListItems(
+            values: buildListItems(
               imageList,
               function (item) {
                 item.value = editor.convertURL(item.value || item.url, 'src');
@@ -889,7 +557,7 @@ define(
             name: 'class',
             type: 'listbox',
             label: 'Class',
-            values: Utils.buildListItems(
+            values: buildListItems(
               editor.settings.image_class_list,
               function (item) {
                 if (item.value) {
@@ -910,7 +578,7 @@ define(
             filetype: 'image',
             label: 'Source',
             autofocus: true,
-            onchange: onSrcChange,
+            onchange: srcChange,
             onbeforecall: onBeforeCall
           },
           imageListCtrl
@@ -947,105 +615,122 @@ define(
           generalFormItems.push({ name: 'caption', type: 'checkbox', label: 'Caption' });
         }
 
-        if (editor.settings.image_advtab || editor.settings.images_upload_url) {
-          var body = [
-            {
-              title: 'General',
-              type: 'form',
-              items: generalFormItems
+        function mergeMargins(css) {
+          if (css.margin) {
+
+            var splitMargin = css.margin.split(" ");
+
+            switch (splitMargin.length) {
+              case 1: //margin: toprightbottomleft;
+                css['margin-top'] = css['margin-top'] || splitMargin[0];
+                css['margin-right'] = css['margin-right'] || splitMargin[0];
+                css['margin-bottom'] = css['margin-bottom'] || splitMargin[0];
+                css['margin-left'] = css['margin-left'] || splitMargin[0];
+                break;
+              case 2: //margin: topbottom rightleft;
+                css['margin-top'] = css['margin-top'] || splitMargin[0];
+                css['margin-right'] = css['margin-right'] || splitMargin[1];
+                css['margin-bottom'] = css['margin-bottom'] || splitMargin[0];
+                css['margin-left'] = css['margin-left'] || splitMargin[1];
+                break;
+              case 3: //margin: top rightleft bottom;
+                css['margin-top'] = css['margin-top'] || splitMargin[0];
+                css['margin-right'] = css['margin-right'] || splitMargin[1];
+                css['margin-bottom'] = css['margin-bottom'] || splitMargin[2];
+                css['margin-left'] = css['margin-left'] || splitMargin[1];
+                break;
+              case 4: //margin: top right bottom left;
+                css['margin-top'] = css['margin-top'] || splitMargin[0];
+                css['margin-right'] = css['margin-right'] || splitMargin[1];
+                css['margin-bottom'] = css['margin-bottom'] || splitMargin[2];
+                css['margin-left'] = css['margin-left'] || splitMargin[3];
             }
-          ];
+            delete css.margin;
+          }
+          return css;
+        }
 
-          if (editor.settings.image_advtab) {
-            // Parse styles from img
-            if (imgElm) {
-              if (imgElm.style.marginLeft && imgElm.style.marginRight && imgElm.style.marginLeft === imgElm.style.marginRight) {
-                data.hspace = Utils.removePixelSuffix(imgElm.style.marginLeft);
-              }
-              if (imgElm.style.marginTop && imgElm.style.marginBottom && imgElm.style.marginTop === imgElm.style.marginBottom) {
-                data.vspace = Utils.removePixelSuffix(imgElm.style.marginTop);
-              }
-              if (imgElm.style.borderWidth) {
-                data.border = Utils.removePixelSuffix(imgElm.style.borderWidth);
-              }
-
-              data.style = editor.dom.serializeStyle(editor.dom.parseStyle(editor.dom.getAttrib(imgElm, 'style')));
+        function updateStyle() {
+          function addPixelSuffix(value) {
+            if (value.length > 0 && /^[0-9]+$/.test(value)) {
+              value += 'px';
             }
 
-            body.push({
-              title: 'Advanced',
-              type: 'form',
-              pack: 'start',
-              items: [
-                {
-                  label: 'Style',
-                  name: 'style',
-                  type: 'textbox',
-                  onchange: updateVSpaceHSpaceBorder
-                },
-                {
-                  type: 'form',
-                  layout: 'grid',
-                  packV: 'start',
-                  columns: 2,
-                  padding: 0,
-                  alignH: ['left', 'right'],
-                  defaults: {
-                    type: 'textbox',
-                    maxWidth: 50,
-                    onchange: updateStyle
-                  },
-                  items: [
-                    { label: 'Vertical space', name: 'vspace' },
-                    { label: 'Horizontal space', name: 'hspace' },
-                    { label: 'Border', name: 'border' }
-                  ]
-                }
-              ]
-            });
+            return value;
           }
 
-          if (editor.settings.images_upload_url) {
-            var acceptExts = '.jpg,.jpeg,.png,.gif';
+          if (!editor.settings.image_advtab) {
+            return;
+          }
 
-            var uploadTab = {
-              title: 'Upload',
-              type: 'form',
-              layout: 'flex',
-              direction: 'column',
-              align: 'stretch',
-              padding: '20 20 20 20',
-              items: [
-                {
-                  type: 'container',
-                  layout: 'flex',
-                  direction: 'column',
-                  align: 'center',
-                  spacing: 10,
-                  items: [
-                    {
-                      text: "Browse for an image",
-                      type: 'browsebutton',
-                      accept: acceptExts,
-                      onchange: onFileInput
-                    },
-                    {
-                      text: 'OR',
-                      type: 'label'
-                    }
-                  ]
-                },
-                {
-                  text: "Drop an image here",
-                  type: 'dropzone',
-                  accept: acceptExts,
-                  height: 100,
-                  onchange: onFileInput
-                }
-              ]
-            };
+          var data = win.toJSON(),
+            css = dom.parseStyle(data.style);
 
-            body.push(uploadTab);
+          css = mergeMargins(css);
+
+          if (data.vspace) {
+            css['margin-top'] = css['margin-bottom'] = addPixelSuffix(data.vspace);
+          }
+          if (data.hspace) {
+            css['margin-left'] = css['margin-right'] = addPixelSuffix(data.hspace);
+          }
+          if (data.border) {
+            css['border-width'] = addPixelSuffix(data.border);
+          }
+
+          win.find('#style').value(dom.serializeStyle(dom.parseStyle(dom.serializeStyle(css))));
+        }
+
+        function updateVSpaceHSpaceBorder() {
+          if (!editor.settings.image_advtab) {
+            return;
+          }
+
+          var data = win.toJSON(),
+            css = dom.parseStyle(data.style);
+
+          win.find('#vspace').value("");
+          win.find('#hspace').value("");
+
+          css = mergeMargins(css);
+
+          //Move opposite equal margins to vspace/hspace field
+          if ((css['margin-top'] && css['margin-bottom']) || (css['margin-right'] && css['margin-left'])) {
+            if (css['margin-top'] === css['margin-bottom']) {
+              win.find('#vspace').value(removePixelSuffix(css['margin-top']));
+            } else {
+              win.find('#vspace').value('');
+            }
+            if (css['margin-right'] === css['margin-left']) {
+              win.find('#hspace').value(removePixelSuffix(css['margin-right']));
+            } else {
+              win.find('#hspace').value('');
+            }
+          }
+
+          //Move border-width
+          if (css['border-width']) {
+            win.find('#border').value(removePixelSuffix(css['border-width']));
+          }
+
+          win.find('#style').value(dom.serializeStyle(dom.parseStyle(dom.serializeStyle(css))));
+
+        }
+
+        if (editor.settings.image_advtab) {
+          // Parse styles from img
+          if (imgElm) {
+            if (imgElm.style.marginLeft && imgElm.style.marginRight && imgElm.style.marginLeft === imgElm.style.marginRight) {
+              data.hspace = removePixelSuffix(imgElm.style.marginLeft);
+            }
+            if (imgElm.style.marginTop && imgElm.style.marginBottom && imgElm.style.marginTop === imgElm.style.marginBottom) {
+              data.vspace = removePixelSuffix(imgElm.style.marginTop);
+            }
+            if (imgElm.style.borderWidth) {
+              data.border = removePixelSuffix(imgElm.style.borderWidth);
+            }
+
+            data.style = editor.dom.serializeStyle(editor.dom.parseStyle(editor.dom.getAttrib(imgElm, 'style')));
           }
 
           // Advanced dialog shows general+advanced tabs
@@ -1053,7 +738,45 @@ define(
             title: 'Insert/edit image',
             data: data,
             bodyType: 'tabpanel',
-            body: body,
+            body: [
+              {
+                title: 'General',
+                type: 'form',
+                items: generalFormItems
+              },
+
+              {
+                title: 'Advanced',
+                type: 'form',
+                pack: 'start',
+                items: [
+                  {
+                    label: 'Style',
+                    name: 'style',
+                    type: 'textbox',
+                    onchange: updateVSpaceHSpaceBorder
+                  },
+                  {
+                    type: 'form',
+                    layout: 'grid',
+                    packV: 'start',
+                    columns: 2,
+                    padding: 0,
+                    alignH: ['left', 'right'],
+                    defaults: {
+                      type: 'textbox',
+                      maxWidth: 50,
+                      onchange: updateStyle
+                    },
+                    items: [
+                      { label: 'Vertical space', name: 'vspace' },
+                      { label: 'Horizontal space', name: 'hspace' },
+                      { label: 'Border', name: 'border' }
+                    ]
+                  }
+                ]
+              }
+            ],
             onSubmit: onSubmitForm
           });
         } else {
@@ -1066,43 +789,6 @@ define(
           });
         }
       }
-
-      function open() {
-        createImageList(showDialog);
-      }
-
-      return {
-        open: open
-      };
-    };
-  }
-);
-
-/**
- * Plugin.js
- *
- * Released under LGPL License.
- * Copyright (c) 1999-2017 Ephox Corp. All rights reserved
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
-/**
- * This class contains all core logic for the image plugin.
- *
- * @class tinymce.image.Plugin
- * @private
- */
-define(
-  'tinymce.plugins.image.Plugin',
-  [
-    'tinymce.core.PluginManager',
-    'tinymce.core.util.Tools',
-    'tinymce.plugins.image.ui.Dialog'
-  ],
-  function (PluginManager, Tools, Dialog) {
-    PluginManager.add('image', function (editor) {
 
       editor.on('preInit', function () {
         function hasImageClass(node) {
@@ -1124,7 +810,6 @@ define(
               if (hasImageClass(node)) {
                 node.attr('contenteditable', state ? 'false' : null);
                 Tools.each(node.getAll('figcaption'), toggleContentEditable);
-                Tools.each(node.getAll('img'), toggleContentEditable);
               }
             }
           };
@@ -1137,19 +822,19 @@ define(
       editor.addButton('image', {
         icon: 'image',
         tooltip: 'Insert/edit image',
-        onclick: Dialog(editor).open,
+        onclick: createImageList(showDialog),
         stateSelector: 'img:not([data-mce-object],[data-mce-placeholder]),figure.image'
       });
 
       editor.addMenuItem('image', {
         icon: 'image',
         text: 'Image',
-        onclick: Dialog(editor).open,
+        onclick: createImageList(showDialog),
         context: 'insert',
         prependToContext: true
       });
 
-      editor.addCommand('mceImage', Dialog(editor).open);
+      editor.addCommand('mceImage', createImageList(showDialog));
     });
 
     return function () { };

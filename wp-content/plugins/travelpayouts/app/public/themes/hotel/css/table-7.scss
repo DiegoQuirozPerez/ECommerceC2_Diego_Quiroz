@@ -120,6 +120,7 @@
     color: #3dafff!important;
   }
   box-sizing: border-box;
+  cursor: pointer;
   border: 2px solid #3dafff;
 }
 
@@ -586,6 +587,9 @@ span.ellipsis {
     position: absolute;
     top: 32%;
   }
+  .TP-AirlineLogo {
+    top: 0 !important;
+  }
   .TPPopUpButtonTable {
     display: none !important;
   }
@@ -659,18 +663,6 @@ span.ellipsis {
   }
   .TPHotelTable .TP-Plugin-Tables_box tbody tr td.TPbuttonTd {
     background-color: #fff !important;
-  }
-  .TPHotelTable .TP-Plugin-Tables_box tbody tr {
-    height: 200px;
-  }
-  .TPHotelTable .TP-Plugin-Tables_box tbody tr td.TPbuttonTd:last-child {
-    min-height: 60px;
-  }
-  .TPHotelTable .TP-rwd-table tbody tr td:before {
-    height: 100%;
-  }
-  .TP-rwd-table tbody tr td {
-    min-height: 100%
   }
 }
 

@@ -121,6 +121,7 @@
     background: #fff !important;
   }
   box-sizing: border-box;
+  cursor: pointer
 }
 
 .TPHotelTable .TP-Plugin-Tables_box tbody tr td {
@@ -604,6 +605,9 @@ span.ellipsis {
   .TP-tdContent {
     position: absolute;
     top: 32%;
+  }
+  .TP-AirlineLogo {
+    top: 0 !important;
   }
   .TPPopUpButtonTable {
     display: none !important;

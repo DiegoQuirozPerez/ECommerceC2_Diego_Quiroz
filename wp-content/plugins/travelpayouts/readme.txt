@@ -176,30 +176,16 @@ Sure. Our Help Desk is always available at [support.travelpayouts.com](https://s
 
 == Changelog == 
 
-= 0.7.6 = 
-Release Date: Mar 2nd, 2018
-* fixed: hotels white label domain wasn't work for widgets
-
-= 0.7.5 = 
-Release Date: Jan 29th, 2018
-* fixed: tutu link from tables
-
-
-= 0.7.4 = 
-Release Date: July 5th, 2017
-* fixed: jetradar link from tables
-* fixed: calendar widget jetradar link
-* fixed: tutu subid fixed
-
-
 = 0.7.3 = 
 Release Date: July 5th, 2017
+
 * fixed: jetradar link from tables
 * fixed: calendar widget jetradar link
 * fixed: tutu subid fixed
 
 = 0.7.2 = 
 Release Date: June 29th, 2017
+
 * added: 2 hotel tables: selections and selections by dates. Note that selections by dates are displayed if these data are present in the cache. Otherwise, nothing will be displayed
 * improved: Optimized statistics query
 * added: New currencies, now we have 63 of them in tables. We added an option for displaying currency symbol in the price. Now you can hide, or show up to a numerical value, after or just show the currency code instead of the symbol

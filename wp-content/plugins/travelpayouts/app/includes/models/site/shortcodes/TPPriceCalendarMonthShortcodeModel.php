@@ -30,12 +30,11 @@ class TPPriceCalendarMonthShortcodeModel extends TPFlightShortcodeModel{
             ." 1. Цены на месяц по направлению, в одну сторону  ";
         if(TPOPlUGIN_ERROR_LOG)
             error_log($method);
-
         if($this->cacheSecund() && $return_url == false) {
             if(TPOPlUGIN_ERROR_LOG)
                 error_log("{$method} cache");
             if (false === ($return = get_transient($this->cacheKey('1'.$currency,
-                    $origin.$destination, $widget)))) {
+                    $origin.$destination)))) {
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache false");
                 $return = self::$TPRequestApi->get_price_mounth_calendar($attr);
@@ -55,7 +54,7 @@ class TPPriceCalendarMonthShortcodeModel extends TPFlightShortcodeModel{
                     error_log("{$method} cache secund = ".$cacheSecund);
 
                 set_transient( $this->cacheKey('1'.$currency,
-                    $origin.$destination, $widget) , $return, $cacheSecund);
+                    $origin.$destination) , $return, $cacheSecund);
             }
         }else{
             $return = self::$TPRequestApi->get_price_mounth_calendar($attr);
@@ -83,10 +82,8 @@ class TPPriceCalendarMonthShortcodeModel extends TPFlightShortcodeModel{
             'paginate' => true,
             'off_title' => '',
             'subid' => '',
-            'return_url' => false,
-            'widget' => 0
+            'return_url' => false
         );
-        //error_log(print_r($args, true));
         extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
         if ($return_url == 1){
             $return_url = true;
@@ -95,8 +92,7 @@ class TPPriceCalendarMonthShortcodeModel extends TPFlightShortcodeModel{
             'origin' => $origin,
             'destination' => $destination,
             'currency' => $currency,
-            'return_url' => $return_url,
-            'widget' => $widget
+            'return_url' => $return_url
         ));
         //if( ! $return )
         //    return false;

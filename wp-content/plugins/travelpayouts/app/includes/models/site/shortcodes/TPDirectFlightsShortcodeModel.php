@@ -34,7 +34,7 @@ class TPDirectFlightsShortcodeModel extends TPFlightShortcodeModel{
         if($this->cacheSecund() && $return_url == false) {
             if(TPOPlUGIN_ERROR_LOG)
                 error_log("{$method} cache");
-            if ( false === ($rows = get_transient($this->cacheKey('8'.$currency, $origin, $widget)))) {
+            if ( false === ($rows = get_transient($this->cacheKey('8'.$currency, $origin)))) {
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache false");
                 $return = self::$TPRequestApi->get_direct($attr);
@@ -58,7 +58,7 @@ class TPDirectFlightsShortcodeModel extends TPFlightShortcodeModel{
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache secund = ".$cacheSecund);
 
-                set_transient( $this->cacheKey('8'.$currency, $origin, $widget) , $rows, $cacheSecund);
+                set_transient( $this->cacheKey('8'.$currency, $origin) , $rows, $cacheSecund);
             }
         }else{
             $return = self::$TPRequestApi->get_direct($attr);
@@ -101,8 +101,7 @@ class TPDirectFlightsShortcodeModel extends TPFlightShortcodeModel{
             'subid' => '',
             'filter_flight_number' => false,
             'filter_airline' => false,
-            'return_url' => false,
-            'widget' => 0
+            'return_url' => false
             );
         extract(wp_parse_args($args, $defaults), EXTR_SKIP);
         if ($return_url == 1){
@@ -113,8 +112,7 @@ class TPDirectFlightsShortcodeModel extends TPFlightShortcodeModel{
             'currency' => $currency,
             'departure_at' => $departure_at,
             'return_at' => $return_at,
-            'return_url' => $return_url,
-            'widget' => $widget
+            'return_url' => $return_url
         ));
         //if( ! $return )
          //   return false;

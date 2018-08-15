@@ -60,7 +60,7 @@ class TPDirectFlightsRouteShortcodeModel extends TPFlightShortcodeModel{
             if(TPOPlUGIN_ERROR_LOG)
                 error_log("{$method} cache");
             if (false === ($return = get_transient($this->cacheKey('7'.$currency,
-                    $origin.$destination, $widget)))) {
+                    $origin.$destination)))) {
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache false");
                 if(TPOPlUGIN_ERROR_LOG)
@@ -109,7 +109,7 @@ class TPDirectFlightsRouteShortcodeModel extends TPFlightShortcodeModel{
                     error_log("{$method} cache secund = ".$cacheSecund);
 
                 set_transient( $this->cacheKey('7'.$currency,
-                    $origin.$destination, $widget) , $return, $cacheSecund);
+                    $origin.$destination) , $return, $cacheSecund);
             }
         }else{
             $return = array();
@@ -208,8 +208,7 @@ class TPDirectFlightsRouteShortcodeModel extends TPFlightShortcodeModel{
             'subid' => '',
             'filter_flight_number' => false,
             'filter_airline' => false,
-            'return_url' => false,
-            'widget' => 0
+            'return_url' => false
         );
         extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
         if ($return_url == 1){
@@ -219,8 +218,7 @@ class TPDirectFlightsRouteShortcodeModel extends TPFlightShortcodeModel{
             'origin' => $origin,
             'destination' => $destination,
             'currency' => $currency,
-            'return_url' => $return_url,
-            'widget' => $widget
+            'return_url' => $return_url
         ));
         //error_log(print_r($return, true));
         //if( ! $return )

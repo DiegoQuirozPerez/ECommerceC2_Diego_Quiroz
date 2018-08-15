@@ -32,7 +32,7 @@ class TPCheapestTicketsEachMonthShortcodeModel extends TPFlightShortcodeModel{
             if(TPOPlUGIN_ERROR_LOG)
                 error_log("{$method} cache");
             if (false === ($return = get_transient($this->cacheKey('6'.$currency,
-                    $origin.$destination, $widget)))) {
+                    $origin.$destination)))) {
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache -> false");
                 $return = $this->iataAutocomplete((array) self::$TPRequestApi->get_cheapest_tickets_each_month($attr), 6);
@@ -48,7 +48,7 @@ class TPCheapestTicketsEachMonthShortcodeModel extends TPFlightShortcodeModel{
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache secund = ".$cacheSecund);
                 set_transient( $this->cacheKey('6'.$currency,
-                    $origin.$destination, $widget) , $return, $this->cacheSecund());
+                    $origin.$destination) , $return, $this->cacheSecund());
             }
         }else{
 
@@ -83,8 +83,7 @@ class TPCheapestTicketsEachMonthShortcodeModel extends TPFlightShortcodeModel{
             'subid' => '',
             'filter_flight_number' => false,
             'filter_airline' => false,
-            'return_url' => false,
-            'widget' => 0
+            'return_url' => false
         );
         extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
@@ -96,8 +95,7 @@ class TPCheapestTicketsEachMonthShortcodeModel extends TPFlightShortcodeModel{
             'origin' => $origin,
             'destination' => $destination,
             'currency' => $currency,
-            'return_url' => $return_url,
-            'widget' => $widget
+            'return_url' => $return_url
         ));
 
 

@@ -19,8 +19,7 @@ class TPPopularDestinationsAirlinesShortcodeModel extends TPFlightShortcodeModel
             'paginate' => true,
             'off_title' => '',
             'subid' => '',
-            'return_url' => false,
-            'widget' => 0
+            'return_url' => false
         );
         extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
         if ($return_url == 1){
@@ -43,7 +42,7 @@ class TPPopularDestinationsAirlinesShortcodeModel extends TPFlightShortcodeModel
             if(TPOPlUGIN_ERROR_LOG)
                 error_log("{$method} cache");
             if (false === ($return = get_transient($this->cacheKey('10',
-                    $airline, $widget)))) {
+                    $airline)))) {
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache false");
                 $return = self::$TPRequestApi->get_popular($attr);
@@ -64,7 +63,7 @@ class TPPopularDestinationsAirlinesShortcodeModel extends TPFlightShortcodeModel
                     error_log("{$method} cache secund = ".$cacheSecund);
 
                 set_transient( $this->cacheKey('10',
-                    $airline, $widget) , $return, $cacheSecund);
+                    $airline) , $return, $cacheSecund);
             }
         }else{
             $return = self::$TPRequestApi->get_popular($attr);

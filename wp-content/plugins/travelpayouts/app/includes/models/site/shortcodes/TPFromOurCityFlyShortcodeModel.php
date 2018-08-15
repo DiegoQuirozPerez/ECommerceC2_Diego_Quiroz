@@ -36,7 +36,7 @@ class TPFromOurCityFlyShortcodeModel extends TPFlightShortcodeModel{
         if($this->cacheSecund() && $return_url == false){
             if(TPOPlUGIN_ERROR_LOG)
                 error_log("{$method} cache");
-            if ( false === ($rows = get_transient($this->cacheKey('13'.$one_way.$currency, $origin, $widget)))) {
+            if ( false === ($rows = get_transient($this->cacheKey('13'.$one_way.$currency, $origin)))) {
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache false");
                 $return = self::$TPRequestApi->get_latest($attr);
@@ -57,7 +57,7 @@ class TPFromOurCityFlyShortcodeModel extends TPFlightShortcodeModel{
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache secund = ".$cacheSecund);
 
-                set_transient( $this->cacheKey('13'.$one_way.$currency, $origin, $widget) , $rows, $cacheSecund);
+                set_transient( $this->cacheKey('13'.$one_way.$currency, $origin) , $rows, $cacheSecund);
             }
         }else{
             $return = self::$TPRequestApi->get_latest($attr);
@@ -97,8 +97,7 @@ class TPFromOurCityFlyShortcodeModel extends TPFlightShortcodeModel{
             'paginate' => true,
             'off_title' => '',
             'subid' => '',
-            'return_url' => false,
-            'widget' => 0
+            'return_url' => false
         );
         extract(wp_parse_args($args, $defaults), EXTR_SKIP);
 
@@ -113,8 +112,7 @@ class TPFromOurCityFlyShortcodeModel extends TPFlightShortcodeModel{
             'trip_class' => $trip_class,
             'limit' => $limit,
             'one_way' => $one_way,
-            'return_url' => $return_url,
-            'widget' => $widget
+            'return_url' => $return_url
         ));
         //if( ! $rows )
          //   return false;

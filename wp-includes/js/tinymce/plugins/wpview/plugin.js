@@ -88,7 +88,7 @@
 				}
 			}
 
-			event.content = wp.mce.views.setMarkers( event.content, editor );
+			event.content = wp.mce.views.setMarkers( event.content );
 		} );
 
 		// Replace any new markers nodes with views.

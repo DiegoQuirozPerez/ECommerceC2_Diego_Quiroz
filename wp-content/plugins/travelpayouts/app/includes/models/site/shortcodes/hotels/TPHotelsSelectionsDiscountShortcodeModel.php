@@ -57,7 +57,7 @@ class TPHotelsSelectionsDiscountShortcodeModel extends TPHotelShortcodeModel
         //error_log($cacheKey);
 
         if($this->cacheSecund() && $return_url == false){
-            if ( false === ($rows = get_transient($this->cacheKey($cacheKey, '', $widget)))) {
+            if ( false === ($rows = get_transient($this->cacheKey($cacheKey)))) {
                 $return = self::$TPRequestApi->getHotelSelection($attr);
                 $rows = array();
                 $cacheSecund = 0;
@@ -69,7 +69,7 @@ class TPHotelsSelectionsDiscountShortcodeModel extends TPHotelShortcodeModel
                     $rows = array_shift($rows);
                     $cacheSecund = $this->cacheSecund('hotel');
                 }
-                set_transient( $this->cacheKey($cacheKey, '', $widget) , $rows, $cacheSecund);
+                set_transient( $this->cacheKey($cacheKey) , $rows, $cacheSecund);
             }
 
         } else {
@@ -126,7 +126,7 @@ class TPHotelsSelectionsDiscountShortcodeModel extends TPHotelShortcodeModel
             'distance_from' => 0,
             'distance_to' => 3,
             'number_results' => 20,
-            'currency' => TPCurrencyUtils::getCurrency(),
+            'currency' => TPCurrencyUtils::getDefaultCurrency(),
             'return_url' => false,
             'language' => TPLang::getLang(),
             'type_selections' => 'popularity',
@@ -135,7 +135,6 @@ class TPHotelsSelectionsDiscountShortcodeModel extends TPHotelShortcodeModel
             'type_selections_label' => '',
             'subid' => '',
             'link_without_dates' => $linkWithoutDates,
-            'widget' => 0
         );
 
 
@@ -146,7 +145,6 @@ class TPHotelsSelectionsDiscountShortcodeModel extends TPHotelShortcodeModel
             $return_url = true;
         }
 
-        error_log($currency);
         //$check_in = date('Y-m-d');
         //$check_out = $this->getCheckOut($day);
 
@@ -158,8 +156,7 @@ class TPHotelsSelectionsDiscountShortcodeModel extends TPHotelShortcodeModel
             'language' => $language,
             'limit' => $number_results,
             'type' => $type_selections,
-            'return_url' => $return_url,
-            'widget' => $widget
+            'return_url' => $return_url
         ));
 
 

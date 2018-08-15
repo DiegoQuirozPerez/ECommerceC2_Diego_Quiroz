@@ -64,7 +64,7 @@ class TPHotelsSelectionsDateShortcodeModel  extends TPHotelShortcodeModel
         $cacheKey = "hotel_1_selections_date_{$currency}_{$language}_{$limit}_{$type}_{$id}";
 
         if($this->cacheSecund() && $return_url == false){
-            if ( false === ($rows = get_transient($this->cacheKey($cacheKey, '', $widget)))) {
+            if ( false === ($rows = get_transient($this->cacheKey($cacheKey)))) {
                 $return = self::$TPRequestApi->getHotelSelection($attr);
                 $rows = array();
                 $cacheSecund = 0;
@@ -76,7 +76,7 @@ class TPHotelsSelectionsDateShortcodeModel  extends TPHotelShortcodeModel
                     $rows = array_shift($rows);
                     $cacheSecund = $this->cacheSecund('hotel');
                 }
-                set_transient( $this->cacheKey($cacheKey, '', $widget) , $rows, $cacheSecund);
+                set_transient( $this->cacheKey($cacheKey) , $rows, $cacheSecund);
             }
 
         } else {
@@ -131,7 +131,7 @@ class TPHotelsSelectionsDateShortcodeModel  extends TPHotelShortcodeModel
             'distance_from' => 0,
             'distance_to' => 3,
             'number_results' => 20,
-            'currency' => TPCurrencyUtils::getCurrency(),
+            'currency' => TPCurrencyUtils::getDefaultCurrency(),
             'return_url' => false,
             'language' => TPLang::getLang(),
             'type_selections' => 'popularity',
@@ -142,7 +142,6 @@ class TPHotelsSelectionsDateShortcodeModel  extends TPHotelShortcodeModel
             'check_in' => date('d-m-Y'),
             'check_out' => date('d-m-Y', time()+DAY_IN_SECONDS),
             'link_without_dates' => $linkWithoutDates,
-            'widget' => 0
         );
         extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
@@ -161,8 +160,7 @@ class TPHotelsSelectionsDateShortcodeModel  extends TPHotelShortcodeModel
             'language' => $language,
             'limit' => $number_results,
             'type' => $type_selections,
-            'return_url' => $return_url,
-            'widget' => $widget
+            'return_url' => $return_url
         ));
 
 

@@ -28,180 +28,102 @@ jQuery(function($) {
             }
         });
 
-        $('.TPButtonTableDates').bind( "click", handlerRailwayDatepickerTest );
+        $('.TPButtonTableDates').each(function(index, element) {
+            $(element).pikaday({
+                firstDay: 1,
+                i18n: {
+                    previousMonth : 'Предыдущий месяц',
+                    nextMonth     : 'Следующий месяц',
+                    months        : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Aвгуст','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+                    weekdays      : ['Понедельник','Вторник','Среда','Четверг','Пятницу','Суббота','Воскресенье'],
+                    weekdaysShort : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
+                },
+                minDate: new Date(),
+                maxDate: new Date(new Date().setDate(new Date().getDate() + 90)),
+                //yearRange: [2000,2020],
+                onSelect: function(date) {
+                    var dateFormat, tutuURL, target;
+                    dateFormat = new Date(date);
+                    target = parseInt($(element).data('target'));
+                    tutuURL = $(element).data('href')+dateFormat.format('yyyy-mm-d');
+                    openInNewTab(tutuURL, target);
 
-    });
-
-    var handlerRailwayDatepickerTest = function (e) {
-        e.preventDefault()
-        var link, picker, linkUrl, target, dateUrl, linkOpen;
-        link = $(this);
-        //link.unbind('click');
-        target = parseInt(link.data('target'));
-        linkUrl = link.data('href');
-        picker = link.pikaday({
-            firstDay: 1,
-            i18n: {
-                previousMonth : 'Предыдущий месяц',
-                nextMonth     : 'Следующий месяц',
-                months        : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Aвгуст','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-                weekdays      : ['Понедельник','Вторник','Среда','Четверг','Пятницу','Суббота','Воскресенье'],
-                weekdaysShort : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
-            },
-            minDate: new Date(),
-            maxDate: new Date(new Date().setDate(new Date().getDate() + 90)),
-            linkURL: linkUrl,
-            linkTarget: target,
-            onDraw: function () {
-                $(document).find('.tp-pika-link').click(function (e) {
-                    picker.pikaday('hide');
-                    picker.pikaday('destroy');
-                });
-            },
-            onOpen: function () {
-                console.log('onOpen')
-                $(document).find('.tp-pika-link').click(function (e) {
-                    picker.pikaday('hide');
-                    picker.pikaday('destroy');
-                });
-            },
-            onSelect: function(date) {
-                console.log('onSelect')
-                var dateFormat;
-                dateFormat = new Date(date);
-                dateUrl = dateFormat.format('yyyy-mm-d');
-                linkUrl += dateFormat.format('yyyy-mm-d');
-                console.log(linkUrl)
-                console.log(dateUrl)
-            },
-            onClose: function() {
-                console.log('onClose')
-                console.log(linkUrl);
-                console.log(dateUrl);
-            },
-
-        });
-        picker.pikaday('show');
-    }
-
-    /*var handlerRailwayDatepicker = function () {
-        var link, picker, linkUrl, target, dateUrl, linkOpen;
-        link = $(this);
-        link.unbind('click');
-        target = parseInt(link.data('target'));
-        linkUrl = link.data('href');
-        picker = link.pikaday({
-            firstDay: 1,
-            i18n: {
-                previousMonth : 'Предыдущий месяц',
-                nextMonth     : 'Следующий месяц',
-                months        : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Aвгуст','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-                weekdays      : ['Понедельник','Вторник','Среда','Четверг','Пятницу','Суббота','Воскресенье'],
-                weekdaysShort : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
-            },
-            minDate: new Date(),
-            maxDate: new Date(new Date().setDate(new Date().getDate() + 90)),
-            //yearRange: [2000,2020],
-            onOpen: function () {
-                console.log('onOpen')
-            },
-            onDraw: function () {
-                console.log('onDraw')
-                //console.log($(document).find('.pika-button'))
-            },
-            onSelect: function(date) {
-                console.log('onSelect')
-                var dateFormat;
-                dateFormat = new Date(date);
-                dateUrl = dateFormat.format('yyyy-mm-d');
-                linkUrl += dateFormat.format('yyyy-mm-d');
-                //link.attr('href', linkUrl);
-                //link.bind('click');
-                openInNewTab(link, picker, linkUrl, target);
-            },
-            onClose: function() {
-                console.log('onClose')
-                console.log(linkUrl);
-                console.log(dateUrl);
-            },
-
-        });
-        console.log(linkUrl);
-        console.log(dateUrl);
-        //picker.eq(0).pikaday('show');
-        picker.pikaday('show');
-    };
-    var handlerRailwayClickLink = function (url) {
-        window.open(url);
-        //window.open(url, '_blank');
-    }
-
-    function openLink(strUrl, picker) {
-        console.log( $(document).find( ":focus" ))
-        $(document).find( "body" ).focus();
-        picker.pikaday('destroy');
-        $(document).find('.pika-single').detach();
-        var evLink = document.createElement('a');
-        evLink.href = strUrl;
-        evLink.target = '_blank';
-        document.body.appendChild(evLink);
-        evLink.click();
-// Now delete it
-        evLink.parentNode.removeChild(evLink);
-    }
-
-    function openInNewTab(link, picker, url, target) {
-        picker.pikaday('destroy');
-        $(document).find('.pika-single').detach();
-        if (target == 1){
-            //openLink(url)
-            gBrowser.selectedTab = gBrowser.addTab("http://example.com");
-            /*var frm = $('<form   method="get" action="' + url + '" target="_blank"></form>')
-            $(document).find("body").append(frm);
-            frm.submit().remove();
-            var data = {url: url};
-            console.log(ajaxurl)
-            console.log(ajaxurl+'?action=railway_open_link')
-            $.ajax({
-                url: ajaxurl + '?action=railway_open_link',
-                type: "POST", // Делаем POST запрос
-                data: data,
-                success: function (data) {
-                    console.log(data.substring(0, data.length - 1));
-                    console.log('success');
-                    //document.location.href = '';
                 }
             });
+        });
 
-            /*
-
-             */
-            //link.bind( "click", handlerRailwayDatepicker );
-            /*link.removeAttr("href");
-            link.attr("href", url);
-            link.attr("target", "_blank");
-            fakeClick(link);
-            //$('body').append('<a id="openLinkNewTab" href="' + url + '" target="_blank"><span></span></a>').find('#openLinkNewTab span').click().remove();
-          /*  link.unbind( "click" );
-            link.removeAttr("href");
-            link.attr("href", url);
-            link.attr("target", "_blank");
-
-            link[0].click();
-            //link.attr("onclick", "openLink('"+url+"'); return false;");
-            //link[0].onclick;
-            //link
-            //link.bind( "click", handlerRailwayClickLink(url) );
-            //link.click();
-            link.unbind("click");
-            link.bind( "click", handlerRailwayDatepicker );
-            return false;*
-        } else {
-            document.location.href = url;
+        function openInNewTab(url, target) {
+            console.log(url);
+            console.log(target);
+            if (target == 1){
+                window.open(url, '_blank');
+            } else {
+                document.location.href = url;
+            }
+            return false;
         }
-        return false;
-    }*/
 
+        /* var datepicker = $('.TPButtonTableDates').pikaday({
+         firstDay: 1,
+         i18n: {
+         previousMonth : 'Предыдущий месяц',
+         nextMonth     : 'Следующий месяц',
+         months        : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Aвгуст','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+         weekdays      : ['Понедельник','Вторник','Среда','Четверг','Пятницу','Суббота','Воскресенье'],
+         weekdaysShort : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
+         },
+         minDate: new Date(),
+         maxDate: new Date(new Date().setDate(new Date().getDate() + 90)),
+         //yearRange: [2000,2020],
+         onSelect: function(date) {
+         // var date = document.createTextNode(this.getMoment().format('Do MMMM YYYY') + ' ');
+         // console.log(this.getMoment().format().substring(0, 10));
+         var dateFormat = new Date(date);
+         console.log(dateFormat.getFullYear())
+         console.log(dateFormat.getMonth())
+         console.log(dateFormat.getDate())
+         console.log(dateFormat.format('yyyy-mm-d'))
+         console.log($(this))
+         console.log(datepicker.data('href'))
+         //console.log($(this).fieldValue())
+         }
+         });*/
+
+
+
+
+
+
+
+        /*$(document).find('.TP-Plugin-Tables_box > tbody  > tr').each(function () {
+         if($(this).children("td:last").children('.TPPopUpButtonTable').length > 0 &&
+         $(this).children("td:last").hasClass('TP-hidden')){
+         //$(this).children("td:last").children('.TPPopUpButtonTable').clone();
+         if ( $(".TP-Plugin-Tables_box tbody tr td:last-child").hasClass("TP-hidden") ) {
+         if ( $(".TP-Plugin-Tables_box tbody tr td:nth-last-child(2)").hasClass("TP-hidden") ) {
+         if ( $(".TP-Plugin-Tables_box tbody tr td:nth-last-child(3)").hasClass("TP-hidden") ) {
+         if ( $(".TP-Plugin-Tables_box tbody tr td:nth-last-child(4)").hasClass("TP-hidden") ) {
+         ;
+         }else{
+         $(".TP-Plugin-Tables_box tbody tr td:nth-last-child(4)").append($(this).children("td:last").children('.TPPopUpButtonTable').clone());
+         console.log("eq(-3)");
+         };
+         }else{
+         $(".TP-Plugin-Tables_box tbody tr td:nth-last-child(3)").append($(this).children("td:last").children('.TPPopUpButtonTable').clone());
+         console.log("eq(-2)");
+         };
+         }else{
+         $(".TP-Plugin-Tables_box tbody tr td:nth-last-child(2)").append($(this).children("td:last").children('.TPPopUpButtonTable').clone());
+         console.log("eq(-1)");
+         };
+         }else{
+         $(".TP-Plugin-Tables_box tbody tr td:last-child").append($(this).children("td:last").children('.TPPopUpButtonTable').clone());
+         }
+         }
+         })*/
+
+
+    });
     var conteiner = '.TP-Plugin-Tables_wrapper';
     var table = ' .TP-Plugin-Tables_box';
 
@@ -256,44 +178,38 @@ jQuery(function($) {
      tpCityAutocomplete.TPCityStandTitle("[data-title-case-destination-iata]", "title-case-destination-iata", title_case_destination);
      tpCityAutocomplete.TPAirlineStandTable("[data-airline-iata]", "airline-iata");*/
 
-    /*console.log(jQuery.fn);
-    console.log($.fn.dataTableExt );
-    console.log($.fn.dataTableExt.oSort );
-    console.log(jQuery.fn.dataTableExt);
-    console.log(jQuery.fn.dataTableExt.oSort);*/
-
     /** **/
-    $.fn.dataTableExt.oSort['tp-date-asc']  = function(a,b) {
+    jQuery.fn.dataTableExt.oSort['tp-date-asc']  = function(a,b) {
         var x = $(a).data("tptime");
         var y = $(b).data("tptime");
         //console.log(y);
         return ((x < y) ? -1 : ((x > y) ?  1 : 0));
     };
-    $.fn.dataTableExt.oSort['tp-date-desc'] = function(a,b) {
+    jQuery.fn.dataTableExt.oSort['tp-date-desc'] = function(a,b) {
         var x = $(a).data("tptime");
         var y = $(b).data("tptime");
         return ((x < y) ? 1 : ((x > y) ?  -1 : 0));
     };
 
     /** **/
-    $.fn.dataTableExt.oSort['tp-found-asc']  = function(a,b) {
+    jQuery.fn.dataTableExt.oSort['tp-found-asc']  = function(a,b) {
         var x = ($(a).data("tpctime") - $(a).data("tptime"));
         var y = ($(b).data("tpctime") - $(b).data("tptime"));
         return ((x < y) ? -1 : ((x > y) ?  1 : 0));
     };
-    $.fn.dataTableExt.oSort['tp-found-desc'] = function(a,b) {
+    jQuery.fn.dataTableExt.oSort['tp-found-desc'] = function(a,b) {
         var x = ($(a).data("tpctime") - $(a).data("tptime"));
         var y = ($(b).data("tpctime") - $(b).data("tptime"));
         return ((x < y) ? 1 : ((x > y) ?  -1 : 0));
     };
 
     /** **/
-    $.fn.rowCount = function() {
+    jQuery.fn.rowCount = function() {
         return $('tr', $(this).find('tbody')).length;
     };
 
     /** **/
-    $.fn.getPaginateTP = function() {
+    jQuery.fn.getPaginateTP = function() {
         if($(this).data("paginate") == true){
             if($(this).rowCount() > $(this).data("paginate_limit") ){
                 return true;
@@ -304,24 +220,24 @@ jQuery(function($) {
     };
 
     /** **/
-    $.fn.dataTableExt.oSort['tp-price-asc']  = function(a,b) {
+    jQuery.fn.dataTableExt.oSort['tp-price-asc']  = function(a,b) {
         var x = $(a).data("price");
         var y = $(b).data("price");
         return ((x < y) ? -1 : ((x > y) ?  1 : 0));
     };
-    $.fn.dataTableExt.oSort['tp-price-desc'] = function(a,b) {
+    jQuery.fn.dataTableExt.oSort['tp-price-desc'] = function(a,b) {
         var x = $(a).data("price");
         var y = $(b).data("price");
         return ((x < y) ? 1 : ((x > y) ?  -1 : 0));
     };
 
-    $.fn.dataTableExt.oSort['tp-airline_logo-asc']  = function(a,b) {
+    jQuery.fn.dataTableExt.oSort['tp-airline_logo-asc']  = function(a,b) {
 
         var x = ($(a).data("tpairline"));
         var y = ($(b).data("tpairline"));
         return ((x < y) ? -1 : ((x > y) ?  1 : 0));
     };
-    $.fn.dataTableExt.oSort['tp-airline_logo-desc'] = function(a,b) {
+    jQuery.fn.dataTableExt.oSort['tp-airline_logo-desc'] = function(a,b) {
         var x = ($(a).data("tpairline"));
         var y = ($(b).data("tpairline"));
         return ((x < y) ? 1 : ((x > y) ?  -1 : 0));

@@ -1,10 +1,9 @@
 === Weglot Translate - Translate your WP website ===
 Contributors: remyb92
 Tags: translate,translation,language,multilingual,bilingual,international,localization,multilanguage,multi language,translations,translator,multilangues,traduction,traducteur,ubersetzung,mehrsprachig,traduccion,traduzione,vertaling,vertaler,meertalig
-Requires at least: 4.5
-Tested up to: 4.9
-Requires PHP: 5.3
-Stable tag: 1.11
+Requires at least: 4.0
+Tested up to: 4.8
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +17,7 @@ a unique dashboard to edit translations or purchase professional translations to
 With Weglot Translate, you can translate your site into a multilingual website with multiple languages in minutes without doing any code.
 Weglot Translate is totally SEO compatible. Weglot Translate follows Google's best practice in terms of multilingual websites to serve a translated webpage with clean source code. Every translated version of your website will be indexed by Google.
 
-Weglot Translate, a WP multi language plugin, is trusted by companies in e-commerce, SaaS, marketplaces, corporate websites, mobile application landing pages, blogs, etc.
+Weglot Translate is trusted by companies in e-commerce, SaaS, marketplaces, corporate websites, mobile application landing pages, blogs, etc.
 
 Check Weglot Translate in video:
 
@@ -42,10 +41,6 @@ Weglot Translate is free for small websites (under 2000 words) with one translat
 Weglot Translate has Free and Premium plans available on the [pricing page](https://weglot.com/pricing), depending on your needs. You can always take the Weglot Translate free trial version to test it.
 Weglot Translate offers professional support to premium users to help them translate their websites.
 
-Can I migrate from WPML or Polylang to Weglot Translate?
-
-Yes, you can easily migrate to Weglot Translate. Simply deactivate WPML or Polylang to only have one multilingual plugin. Then start using Weglot normally. If you need to import some translations contact us directly at support@weglot.com
-
 Does Weglot Translate provide support?
 
 Yes, the Weglot Translate team will support everyone. Post a topic on the [support forum](https://wordpress.org/support/plugin/weglot) or email us at support@weglot.com or speak with us on our live chat on the Weglot website.
@@ -53,10 +48,6 @@ Yes, the Weglot Translate team will support everyone. Post a topic on the [suppo
 Weglot Translate plugin is translated in Dutch, English_UK, French, German, Italian, Portuguese_BR, Russian and Spanish. More translations will be added.
 
 Weglot Translate, go multilingual now.
-
-= Help translate the plugin =
-
-You can help translate Weglot Translate plugin on [__translate.wordpress.org__](https://translate.wordpress.org/projects/wp-plugins/weglot).
 
 == Installation ==
 
@@ -81,7 +72,7 @@ Weglot Translate is easy to set up:
 
 == Frequently Asked Questions ==
 = Is Weglot Translate free? =
-Weglot Translate is a freemium plugin: it is free for small websites (under 2000 words) with one translation language. If you need more, you can upgrade. Details of our pricing can be found [here](https://weglot.com/pricing)
+Weglot Translate is a freemium plugin: it is free for small websites (under 2000 words) with one translation language. If you need more, you can upgrade. Details of our pricing can be found [here]: (https://weglot.com/pricing)
 
 In any case, you can try Weglot free for 10 days.
 = Edit my translations =
@@ -151,59 +142,6 @@ Weglot Translate is easy to set up:
 See changelog for upgrade changes.
 
 == Changelog ==
-
-= 1.11 (05/04/2018) = 
-* Add new languages
-* Add new filters
-* Add Yoast Premium compatibility on redirect
-* Bugfix : Exclusion AMP
-* Bugfix : Redirection checkout order on WooCommerce 
-
-= 1.10 =
-* Add new languages + add Oman flag
-* Can potentially translate email sent from admin
-* Add tags to inline elements to ignore when parsing
-
-= 1.9.3 =
-* Remove Freemius
-
-= 1.9.2 =
-* Fix Freemius assets
-
-= 1.9.1 =
-* Fix Freemius error when changing base dir
-* Fix wc translations when special characters.
-
-= 1.9 =
-* Fix login redirection
-* Add translation for Town, cities and other dynamic fields in WC checkout
-* exclude URL now accepts full URL and any blank separator
-
-= 1.8.2 =
-* Fix pb when permalinks has no ending slash
-* Add notif when plugin is not congigured
-
-
-= 1.8.1 =
-* Fix redirection on woocommerce
-
-= 1.8 =
-* Add new banner and icon
-* improve wc redirection
-* can now translate email
-
-
-= 1.7.1 =
-* Fix redirection bug on cart
-
-= 1.7 =
-* Add 6 languages
-* Translate microdata
-* New element translated
-
-= 1.6.1 =
-* Fix url when non standard characters
-* change freemius image
 
 = 1.6 =
 * Add Freemius
